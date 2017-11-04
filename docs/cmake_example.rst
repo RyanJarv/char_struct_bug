@@ -1,1 +1,1 @@
-.. automodule:: cmake_example
+.. automodule:: char_struct_bug

@@ -1,40 +1,21 @@
 #include <pybind11/pybind11.h>
 
-int add(int i, int j) {
-    return i + j;
-}
+struct string_struct {
+    std::string a;
+};
+
+struct char_struct {
+    const char * a;
+};
 
 namespace py = pybind11;
 
-PYBIND11_MODULE(cmake_example, m) {
-    m.doc() = R"pbdoc(
-        Pybind11 example plugin
-        -----------------------
+PYBIND11_MODULE(char_struct_bug, m) {
+    py::class_<string_struct>(m, "string_struct")
+        .def(py::init<>())
+        .def_readwrite("a", &string_struct::a);
 
-        .. currentmodule:: cmake_example
-
-        .. autosummary::
-           :toctree: _generate
-
-           add
-           subtract
-    )pbdoc";
-
-    m.def("add", &add, R"pbdoc(
-        Add two numbers
-
-        Some other explanation about the add function.
-    )pbdoc");
-
-    m.def("subtract", [](int i, int j) { return i - j; }, R"pbdoc(
-        Subtract two numbers
-
-        Some other explanation about the subtract function.
-    )pbdoc");
-
-#ifdef VERSION_INFO
-    m.attr("__version__") = VERSION_INFO;
-#else
-    m.attr("__version__") = "dev";
-#endif
+    py::class_<char_struct>(m, "char_struct")
+        .def(py::init<>())
+        .def_readwrite("a", &char_struct::a);
 }

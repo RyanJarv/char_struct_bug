@@ -1,4 +1,4 @@
-cmake_example Documentation
+char_struct_bug Documentation
 ============================
 
 Contents:
@@ -6,4 +6,4 @@ Contents:
 .. toctree::
    :maxdepth: 2
 
-   cmake_example
+   char_struct_bug
